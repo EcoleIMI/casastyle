@@ -3,7 +3,9 @@ import path from 'node:path';
 import initSqlJs, { type Database, type SqlValue } from 'sql.js';
 import { hashPassword } from './security.ts';
 
-const DATA_DIR = path.resolve(process.cwd(), 'data');
+const DATA_DIR = process.env.VERCEL
+  ? '/tmp/casastyle-data'
+  : path.resolve(process.cwd(), 'data');
 const DB_PATH = path.join(DATA_DIR, 'casastyle.db');
 
 let dbInstance: Database | null = null;
